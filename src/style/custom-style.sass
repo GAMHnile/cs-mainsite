@@ -1,7 +1,176 @@
 @import ./variables.sass
 
-.navbar .navbar-menu
+body
+  font-family: Montserrat
+
+.navbar
+  position: fixed
+  top: 0
+  width: 100%
+  background-color: black
+  min-height: 4rem
+
+.navbar-start
+  background-color: black
+
+.navbar-img
+  height: 5rem
+  max-height: 50rem !important
+
+.navbar-menu
   box-shadow: none !important
+  justify-content: flex-end
+  font-weight: 600
+
+.navbar-item, .navbar-burger
+  color: white
+
+.navbar-item:hover, .navbar-item:focus
+  background-color: black !important
+  color: $color-primary !important
+
+.navbar-brand, .navbar-item.logo
+  padding: 0 1rem
+  align-items: center
+  min-height: 4rem
+
+.overlay-container
+  position: relative
+  gridArea: 1/1
+  width: 100%
+
+.overlay
+  position: absolute
+  top: 0,
+  left: 0,
+  width: 100%
+  height: 100%
+  background: rgba(0, 0, 0, 0.5)
+
+.hero-text
+  color: white
+  lineHeight: 1
+  padding: 0.25em
+  textAlign: center
+  fontSize: 1rem
+
+.hero-img 
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+
+.cta
+  margin-top: 24px
+  padding: 10px 24px
+  border: 2.5px solid white
+  border-radius: 25px
+  background: transparent
+  outline: none
+  font-size: 16px
+  transition: all 0.2s
+  cursor: pointer
+  color: white
+  font-weight: bold
+  
+.cta:hover, .cta:focus
+  transform: scale(1.05)
+
+.cta:active
+  transform: scale(0.98)
+
+.cta-blue
+  border: 2.5px solid $color-primary
+  color: $color-primary
+
+.section-header
+    color: $color-primary
+
+.footer
+  padding: 1rem 1.5rem
+
+.footer-content
+  display: flex
+  justify-content: space-between
+  width: 100%
+
+.footer-items
+  width: 50%
+  align-items: center
+  display: flex
+  flex-direction: column
+
+.footer-items-list
+  margin: 0 !important
+  text-align: center !important
+
+.footer-items-list-item > a:hover
+  color: $color-primary !important
+
+.card
+  border: 1px solid #d0d7e7
+  background-color: #f5f7fe
+  display: flex
+  align-items: center
+  border-radius: 1rem
+  flex-direction: column
+  padding: 1.5rem
+  text-align: center
+  margin: 24px 6px
+  min-height: 410px
+  min-width: 320px
+
+.card-content
+  font-weight: 400,
+  line-height: 24px
+  font-size: 16px
+  padding: 0
+
+.card-image
+  width: 100%
+  object-fit: contain
+  border-radius: 5px
+  margin-bottom: 12px
+
+.blog-card
+  border: 1px solid #d0d7e7
+  background-color: #f5f7fe
+  display: flex
+  align-items: center
+  border-radius: 1rem
+  flex-direction: column
+  text-align: center
+  height: 580px
+  padding: 1rem
+  
+.menu-list
+  list-style: none !important
+  text-align: left
+
+.social
+  padding: 2em
+
+.social a
+  padding: .5em .5em .3em .5em
+  border-radius: 1em
+  background-color: $white-ter
+  margin: .5em
+  width: 1em
+  height: 1em
+  vertical-align: middle
+  display: inline
+
+.blog-list-item.is-featured
+  background-color: #d6400033
+
+.blog-list-item header
+  display: flex
+  margin-bottom: 1em
+  
+.blog-list-item .featured-thumbnail
+  flex-basis: 35%
+  margin: 0 1.5em 0 0
 
 .content .taglist
   list-style: none
@@ -18,87 +187,26 @@
     margin-bottom: 1.5rem
     margin-top: 0
 
+@media (min-width: 1300px)
+  .card-image
+    height: 300px
+    width: 400px
+
+@media (max-width: 1300px)
+  .blog-card
+    max-height: 580px
+    height: 100%
+
+@media (max-width: 500px)
+  .card
+    min-width: 100%
+
 // Helper Classes
-.full-width-image-container
-  width: 100vw
-  height: 400px
-  position: relative
-  left: 50%
-  right: 50%
-  margin: 2em -50vw
-  background-size: cover
-  background-position: bottom
-  display: flex
-  justify-content: center
-  align-items: center
-
-.full-width-image
-    width: 100vw
-    height: 400px
-    background-size: cover
-    background-position: bottom
-    display: flex
-    justify-content: center
-    align-items: center
-
-.btn
-    display: inline-block
-    padding: 12px 16px 10px
-    font-size: 18px
-    font-size: 1rem
-    line-height: 1.25
-    background-color: #fff
-    border-radius: .25rem
-    text-decoration: none
-    font-weight: 700
-    color: #CC3700
-    text-align: center
-    -webkit-box-shadow: inset 0 0 0 2px #CC3700
-    box-shadow: inset 0 0 0 2px #f40
-    -webkit-transition: all .15s ease
-    transition: all .15s ease
+.section-mt
+  margin-top: calc(48px + 0.75rem + 3rem)
 
 .margin-top-0
   margin-top: 0 !important
 
-.navbar-item .icon
-  color: $primary
-// Override for use of svg's from https://simpleicons.org/
-.icon svg
-  width: 1.5rem
-  height: 1.5rem
-  fill: currentColor
-.navbar-brand .navbar-item.logo
-  padding: 0 1rem
-footer.footer
-  padding: 3rem 0rem 0rem
-  background-color: transparent
-
-
-.menu-label
-  font-size: 1em !important
-  text-align: left
-.menu-list
-  list-style: none !important
-  text-align: left
-.social
-  padding: 2em
-.social a
-    padding: .5em .5em .3em .5em
-    border-radius: 1em
-    background-color: $white-ter
-    margin: .5em
-    width: 1em
-    height: 1em
-    vertical-align: middle
-    display: inline
-
-// blog roll
-.blog-list-item.is-featured
-  background-color: #d6400033
-.blog-list-item header
-  display: flex
-  margin-bottom: 1em
-.blog-list-item .featured-thumbnail
-  flex-basis: 35%
-  margin: 0 1.5em 0 0
+.justify-center
+  justify-content: center

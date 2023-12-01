@@ -36,14 +36,18 @@ export default class Index extends React.Component {
   render() {
     return (
       <Layout>
-        <section className="section">
+        <section className="section" style={{ paddingTop: "8rem" }}>
           <div className="container">
             <div className="content">
-              <h1>Contact</h1>
+              <h1
+                className="title is-size-3 has-text-weight-bold is-bold-light has-text-centered"
+                style={{ marginBottom: "40px" }}
+              >
+                Contact Us
+              </h1>
               <form
                 name="contact"
                 method="post"
-                action="/contact/thanks/"
                 data-netlify="true"
                 data-netlify-honeypot="bot-field"
                 onSubmit={this.handleSubmit}
@@ -101,7 +105,11 @@ export default class Index extends React.Component {
                   </div>
                 </div>
                 <div className="field">
-                  <button className="button is-link" type="submit">
+                  <button
+                    className="cta cta-blue is-link"
+                    type="submit"
+                    style={{ paddingBlock: "8px", marginTop: "5px" }}
+                  >
                     Send
                   </button>
                 </div>
