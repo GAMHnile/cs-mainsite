@@ -1,42 +1,46 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link, graphql, StaticQuery } from "gatsby";
-import PreviewCompatibleImage from "../PreviewCompatibleImage";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 const BlogRollTemplate = (props) => {
-  const { edges: posts } = props.data.allMarkdownRemark;
+  const { edges } = props.data.allMarkdownRemark;
+  const isBrowser = typeof window !== "undefined";
+  const pathname = isBrowser ? window.location.pathname : "";
+  const posts = pathname === "/" ? edges.slice(0, 2) : edges;
 
   return (
     <div className="columns is-multiline justify-center">
       {posts &&
-        posts.map(({ node: post }) => (
-          <div className="is-parent column is-6" key={post.id}>
-            <article className={`blog-list-item tile is-child blog-card`}>
-              <header className="blog-header">
-                {post?.frontmatter?.featuredimage && (
-                  <div>
-                    <PreviewCompatibleImage
-                      blog
-                      imageInfo={{
-                        image: post.frontmatter.featuredimage,
-                        alt: `featured image thumbnail for post ${post.frontmatter.title}`,
-                        width:
-                          post.frontmatter.featuredimage.childImageSharp
-                            .gatsbyImageData.width,
-                        height:
-                          post.frontmatter.featuredimage.childImageSharp
-                            .gatsbyImageData.height,
-                      }}
-                    />
-                  </div>
-                )}
-              </header>
+        posts.map(({ node: post }) => {
+          const image = getImage(post?.frontmatter?.featuredimage);
+          return (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+              key={post.id}
+              className="column is-5 blog-card"
+            >
+              {image && (
+                <GatsbyImage
+                  image={image}
+                  className="card-image"
+                  alt={post.frontmatter.title}
+                  objectFit="contain"
+                  style={{ minWidth: "200px" }}
+                />
+              )}
+
               <div>
-                <h3>{post.frontmatter.title}</h3>
+                <h4 style={{ marginTop: 0 }}>{post.frontmatter.title}</h4>
                 <p className="title" style={{ fontSize: "15px" }}>
                   {post.frontmatter.date}
                 </p>
               </div>
+
               <p>
                 {post.excerpt}
                 <br />
@@ -45,9 +49,9 @@ const BlogRollTemplate = (props) => {
                   Keep Reading →
                 </Link>
               </p>
-            </article>
-          </div>
-        ))}
+            </div>
+          );
+        })}
     </div>
   );
 };

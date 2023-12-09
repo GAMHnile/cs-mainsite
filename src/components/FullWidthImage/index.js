@@ -71,7 +71,10 @@ export default function FullWidthImage({
                 }}
               >
                 {title && (
-                  <h1 className="has-text-weight-bold has-text-centered is-size-3-mobile is-size-2-tablet is-size-1-widescreen hero-text">
+                  <h1
+                    className="has-text-weight-bold has-text-centered is-size-3-mobile is-size-2-tablet is-size-1-widescreen hero-text"
+                    style={{ color: "white" }}
+                  >
                     {title}
                   </h1>
                 )}
@@ -92,7 +95,7 @@ export default function FullWidthImage({
                   <button
                     className="cta"
                     onClick={() => {
-                      navigate("/contact");
+                      navigate("booking");
                     }}
                   >
                     Book a session

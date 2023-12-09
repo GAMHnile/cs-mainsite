@@ -3,7 +3,9 @@ import { Link } from "gatsby";
 import logo from "../../img/logo.png";
 import facebook from "../../img/social/facebook.svg";
 import instagram from "../../img/social/instagram.svg";
-import twitter from "../../img/social/twitter.svg";
+import tiktok from "../../img/social/tiktok.svg";
+import mail from "../../img/social/mail.svg";
+import phone from "../../img/social/phone.svg";
 
 const Footer = () => {
   return (
@@ -22,7 +24,7 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li className="footer-items-list-item">
-                  <Link className="navbar-item" to="/about">
+                  <Link className="navbar-item" to="/booking">
                     Book a session
                   </Link>
                 </li>
@@ -53,6 +55,20 @@ const Footer = () => {
         </div>
         <div className="column is-4 social">
           <div>
+            <a title="phone" href="tel:+250793835299">
+              <img
+                src={phone}
+                alt="Phone"
+                style={{ width: "1em", height: "1em" }}
+              />
+            </a>
+            <a title="mail" href="mailto:info@thecoolsalon.com">
+              <img
+                src={mail}
+                alt="Email"
+                style={{ width: "1em", height: "1em" }}
+              />
+            </a>
             <a title="facebook" href="https://facebook.com">
               <img
                 src={facebook}
@@ -60,11 +76,16 @@ const Footer = () => {
                 style={{ width: "1em", height: "1em" }}
               />
             </a>
-            <a title="twitter" href="https://twitter.com">
+            <a
+              title="tiktok"
+              href="https://www.tiktok.com/@thecoolsalonrw?_t=8i2tPK0bhgL&_r=1"
+              target="_blank"
+              rel="noreferrer"
+            >
               <img
                 className="fas fa-lg"
-                src={twitter}
-                alt="Twitter"
+                src={tiktok}
+                alt="Tik Tok"
                 style={{ width: "1em", height: "1em" }}
               />
             </a>

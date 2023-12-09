@@ -58,6 +58,27 @@ export const IndexPageTemplate = ({
               {services && services?.blurbs?.length && (
                 <Services services={services} />
               )}
+
+              <div
+                className="section-mt"
+                style={{
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}
+              >
+                <p className="title has-text-centered section-header">
+                  Latest Stories
+                </p>
+                <BlogRoll />
+                <div style={{ justifyContent: "center", display: "flex" }}>
+                  <button
+                    className="cta cta-blue"
+                    onClick={() => navigate("/blog")}
+                  >
+                    See more
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
