@@ -6,14 +6,22 @@ import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 import { getImage } from "gatsby-plugin-image";
 import FullWidthImage from "../components/FullWidthImage";
+import Select from "react-select";
 
 export const BookingPageTemplate = ({ image, title }) => {
   const heroImage = getImage(image) || image;
+  const options = [
+    { value: "barbing", label: "Barbing" },
+    { value: "washing", label: "Washing" },
+    { value: "dyeing", label: "Dyeing" },
+    { value: "hair-dressing", label: "Hair Dressing" },
+    { value: "none", label: "Not listed here" },
+  ];
 
   const initialValues = {
     name: "",
     phoneNumber: "",
-    service: "",
+    service: [],
     date: "",
     time: "",
   };
@@ -39,7 +47,7 @@ export const BookingPageTemplate = ({ image, title }) => {
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
-            {({ values, handleChange }) => {
+            {({ values, handleChange, setFieldValue }) => {
               return (
                 <Form
                   name="booking"
@@ -57,6 +65,7 @@ export const BookingPageTemplate = ({ image, title }) => {
                         type="text"
                         name="name"
                         id="name"
+                        placeholder="Full Name"
                       />
                     </div>
                     <ErrorMessage
@@ -75,6 +84,7 @@ export const BookingPageTemplate = ({ image, title }) => {
                         className="input booking-field"
                         name="phoneNumber"
                         id="phoneNumber"
+                        placeholder="Phone Number"
                       />
                     </div>
                     <ErrorMessage
@@ -90,19 +100,17 @@ export const BookingPageTemplate = ({ image, title }) => {
                         Service
                       </label>
                       <div className="control">
-                        <select
+                        <Select
+                          defaultValue={"none"}
+                          isMulti
                           name="service"
-                          id="service"
-                          className="input booking-field"
-                          onChange={handleChange}
+                          options={options}
                           value={values.service}
-                        >
-                          <option value="barbing">Barbing</option>
-                          <option value="dyeing">Dyeing</option>
-                          <option value="hair-dressing">Hair Dressing</option>
-                          <option value="washing">Washing</option>
-                          <option value="absent">Not listed here</option>
-                        </select>
+                          onChange={(service) =>
+                            setFieldValue("service", service)
+                          }
+                          placeholder="Select service"
+                        />
                       </div>
                     </div>
 
