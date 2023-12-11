@@ -48,8 +48,6 @@ export const BookingPageTemplate = ({ image, title }) => {
             onSubmit={handleSubmit}
           >
             {({ values, handleChange, setFieldValue }) => {
-              console.log({ values });
-
               return (
                 <Form
                   name="booking"
