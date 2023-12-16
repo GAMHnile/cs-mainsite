@@ -39,7 +39,7 @@ export const BookingPageTemplate = ({ image, title }) => {
 
   return (
     <div className="content">
-      <FullWidthImage img={heroImage} title={title} height={"350px"} />
+      <FullWidthImage img={heroImage} title={title} />
       <section className="section">
         <div className="container" style={{ maxWidth: "700px" }}>
           <Formik

@@ -13,7 +13,7 @@ export const ContactPageTemplate = ({ image, title }) => {
 
   return (
     <div className="content">
-      <FullWidthImage img={heroImage} title={title} height={"350px"} />
+      <FullWidthImage img={heroImage} title={title} />
 
       <section className="section">
         <div className="container">
@@ -44,9 +44,7 @@ export const ContactPageTemplate = ({ image, title }) => {
                 <path d="M10 20s-7-9.13-7-13c0-3.866 3.134-7 7-7s7 3.134 7 7v0c0 3.87-7 13-7 13zM10 9c1.105 0 2-0.895 2-2s-0.895-2-2-2v0c-1.105 0-2 0.895-2 2s0.895 2 2 2v0z"></path>
               </svg>
 
-              <span>
-                Kimironko Molte Grazie Plaza KG 153 st/KG 161 st (Munsi y’isoko)
-              </span>
+              <span>Molte Grazie Plaza, KG 161 St, Kimironko, Kigali</span>
             </div>
 
             <div
@@ -103,7 +101,10 @@ export const ContactPageTemplate = ({ image, title }) => {
                 <div style={{ height: "500px" }}>
                   <ReactGoogleMap
                     googleMaps={googleMaps}
-                    center={{ lat: 43.604363, lng: 1.443363 }}
+                    center={{
+                      lat: -1.9500408839556205,
+                      lng: 30.126949553586197,
+                    }}
                     zoom={8}
                   />
                 </div>

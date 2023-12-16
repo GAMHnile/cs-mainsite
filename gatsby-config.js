@@ -4,7 +4,7 @@ module.exports = {
   siteMetadata: {
     title: "Cool Salon",
     description:
-      "This repo contains an example business website that is built with Gatsby, and Netlify CMS.It follows the JAMstack architecture by using Git as a single source of truth, and Netlify for continuous deployment, and CDN distribution.",
+      "Step into Cool Salon and let our talented stylists work their magic. We specialize in all hair types and textures, from trendy cuts to stunning color transformations. Come see why we're the coolest salon in town!",
   },
   plugins: [
     "gatsby-plugin-react-helmet",

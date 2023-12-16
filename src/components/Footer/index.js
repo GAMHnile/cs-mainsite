@@ -97,7 +97,26 @@ const Footer = () => {
               />
             </a>
           </div>
-          <p style={{ marginTop: "3rem", fontSize: "13px" }}>
+          <div
+            className="flex-center"
+            style={{ margin: "2rem 0 1rem 0", justifyContent: "center" }}
+          >
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              style={{ marginRight: "8px", fill: "white" }}
+            >
+              <title>location</title>
+              <path d="M10 20s-7-9.13-7-13c0-3.866 3.134-7 7-7s7 3.134 7 7v0c0 3.87-7 13-7 13zM10 9c1.105 0 2-0.895 2-2s-0.895-2-2-2v0c-1.105 0-2 0.895-2 2s0.895 2 2 2v0z"></path>
+            </svg>
+            <p style={{ fontSize: "13px" }}>
+              Molte Grazie Plaza, KG 161 St, Kimironko, Kigali
+            </p>
+          </div>
+          <p style={{ fontSize: "13px" }}>
             &#169; GAMHnile Software Services, 2023
           </p>
         </div>

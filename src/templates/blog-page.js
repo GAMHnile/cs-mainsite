@@ -12,7 +12,7 @@ export const BlogPageTemplate = ({ image, title }) => {
 
   return (
     <div className="content">
-      <FullWidthImage img={heroImage} title={title} height={"350px"} />
+      <FullWidthImage img={heroImage} title={title} />
       <section className="section section--gradient">
         <div className="container">
           <div className="column is-10 is-offset-1">
