@@ -106,13 +106,9 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <IndexPageTemplate
-        image={frontmatter.image}
         title={frontmatter.title}
-        heading={frontmatter.heading}
-        subheading={frontmatter.subheading}
+        image={frontmatter.image}
         mainpitch={frontmatter.mainpitch}
-        description={frontmatter.description}
-        intro={frontmatter.intro}
         services={frontmatter.services}
       />
     </Layout>
@@ -139,8 +135,6 @@ export const pageQuery = graphql`
             gatsbyImageData(quality: 100, layout: FULL_WIDTH)
           }
         }
-        heading
-        subheading
         mainpitch {
           title
           description
@@ -156,20 +150,6 @@ export const pageQuery = graphql`
             }
             title
           }
-        }
-        description
-        intro {
-          blurbs {
-            image {
-              childImageSharp {
-                gatsbyImageData(width: 240, quality: 64, layout: CONSTRAINED)
-              }
-            }
-            title
-            text
-          }
-          heading
-          description
         }
       }
     }
