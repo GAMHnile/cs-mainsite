@@ -48,7 +48,6 @@ collections:
             }
           - { label: Title, name: title, widget: string }
           - { label: Image, name: image, widget: image }
-          - { label: Heading, name: heading, widget: string }
           - {
               label: Mainpitch,
               name: mainpitch,
@@ -60,11 +59,13 @@ collections:
                 ],
             }
           - {
-              label: Intro,
-              name: intro,
+              label: Services,
+              name: services,
               widget: object,
               fields:
                 [
+                  { label: Title, name: title, widget: string },
+                  { label: Description, name: description, widget: text },
                   {
                     label: Blurbs,
                     name: blurbs,
@@ -72,8 +73,6 @@ collections:
                     fields:
                       [
                         { label: Image, name: image, widget: image },
-                        { label: Text, name: text, widget: text },
-                        { label: Link, name: link, widget: text },
                         { label: Title, name: title, widget: text },
                       ],
                   },
@@ -92,35 +91,15 @@ collections:
           - { label: Image, name: image, widget: image }
           - { label: "Title", name: "title", widget: "string" }
           - { label: "Body", name: "body", widget: "markdown" }
-      - file: "src/pages/products/index.md"
-        label: "Products Page"
-        name: "products"
+      - file: "src/pages/contact/index.md"
+        label: "Contact"
+        name: "contact"
         fields:
           - {
               label: "Template Key",
               name: "templateKey",
               widget: "hidden",
-              default: "product-page",
+              default: "contact-page",
             }
-          - { label: Title, name: title, widget: string }
           - { label: Image, name: image, widget: image }
-          - {
-              label: Intro,
-              name: intro,
-              widget: object,
-              fields:
-                [
-                  {
-                    label: Blurbs,
-                    name: blurbs,
-                    widget: list,
-                    fields:
-                      [
-                        { label: Image, name: image, widget: image },
-                        { label: Text, name: text, widget: text },
-                        { label: Link, name: link, widget: text },
-                        { label: Title, name: title, widget: text },
-                      ],
-                  },
-                ],
-            }
+          - { label: "Title", name: "title", widget: "string" }
