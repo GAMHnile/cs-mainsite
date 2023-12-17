@@ -4,24 +4,24 @@ import { graphql } from "gatsby";
 import { getImage } from "gatsby-plugin-image";
 import Layout from "../components/Layout";
 import FullWidthImage from "../components/FullWidthImage";
-import ReactGoogleMapLoader from "react-google-maps-loader";
-import ReactGoogleMap from "react-google-map";
+import GoogleMapReact from "google-map-react";
 
 // eslint-disable-next-line
 export const ContactPageTemplate = ({ image, title }) => {
   const heroImage = getImage(image) || image;
-  const coordinates = { lat: -1.9500408839556205, lng: 30.126949553586197 };
-
-  const openInMap = () => {
-    window.open(
-      "https://maps.google.com?q=" + coordinates.lat + "," + coordinates.lng
-    );
+  const defaultProps = {
+    center: {
+      lat: -1.9500408839556205,
+      lng: 30.126949553586197,
+    },
+    zoom: 11,
   };
 
-  const handleMapLoaded = (googleMaps) => {
-    if (googleMaps) {
-      console.log("Map loaded successfully");
-    }
+  const openInMap = () => {
+    const {
+      center: { lat, lng },
+    } = defaultProps;
+    window.open("https://maps.google.com?q=" + lat + "," + lng);
   };
 
   return (
@@ -106,36 +106,27 @@ export const ContactPageTemplate = ({ image, title }) => {
             </div>
           </div>
 
-          <ReactGoogleMapLoader
-            params={{
-              key: process.env.GATSBY_GOOGLE_MAPS_API_KEY,
-              libraries: "places",
-            }}
-            render={(googleMaps) =>
-              googleMaps && (
-                <div style={{ height: "500px" }}>
-                  <ReactGoogleMap
-                    googleMaps={googleMaps}
-                    center={coordinates}
-                    zoom={8}
-                    onLoad={handleMapLoaded}
-                  >
-                    <svg
-                      version="1.1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      style={{ fill: "red" }}
-                    >
-                      <title>location</title>
-                      <path d="M10 20s-7-9.13-7-13c0-3.866 3.134-7 7-7s7 3.134 7 7v0c0 3.87-7 13-7 13zM10 9c1.105 0 2-0.895 2-2s-0.895-2-2-2v0c-1.105 0-2 0.895-2 2s0.895 2 2 2v0z"></path>
-                    </svg>
-                  </ReactGoogleMap>
-                </div>
-              )
-            }
-          />
+          <div style={{ height: "500px" }}>
+            <GoogleMapReact
+              bootstrapURLKeys={{ key: process.env.GATSBY_GOOGLE_MAPS_API_KEY }}
+              defaultCenter={defaultProps.center}
+              defaultZoom={defaultProps.zoom}
+            >
+              <svg
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 20 20"
+                style={{ fill: "#d30000" }}
+                lat={defaultProps.center.lat}
+                lng={defaultProps.center.lng}
+              >
+                <title>location</title>
+                <path d="M10 20s-7-9.13-7-13c0-3.866 3.134-7 7-7s7 3.134 7 7v0c0 3.87-7 13-7 13zM10 9c1.105 0 2-0.895 2-2s-0.895-2-2-2v0c-1.105 0-2 0.895-2 2s0.895 2 2 2v0z"></path>
+              </svg>
+            </GoogleMapReact>
+          </div>
         </div>
       </section>
     </div>
