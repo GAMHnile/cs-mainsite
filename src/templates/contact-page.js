@@ -14,7 +14,7 @@ export const ContactPageTemplate = ({ image, title }) => {
       lat: -1.9500408839556205,
       lng: 30.126949553586197,
     },
-    zoom: 11,
+    zoom: 15,
   };
 
   const openInMap = () => {
