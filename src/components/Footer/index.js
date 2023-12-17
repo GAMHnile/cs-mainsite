@@ -8,6 +8,14 @@ import mail from "../../img/social/mail.svg";
 import phone from "../../img/social/phone.svg";
 
 const Footer = () => {
+  const coordinates = { lat: -1.9500408839556205, lng: 30.126949553586197 };
+
+  const showInMapClicked = () => {
+    window.open(
+      "https://maps.google.com?q=" + coordinates.lat + "," + coordinates.lng
+    );
+  };
+
   return (
     <footer className="footer has-background-black has-text-white-ter">
       <div className="content has-text-centered">
@@ -99,7 +107,11 @@ const Footer = () => {
           </div>
           <div
             className="flex-center"
-            style={{ margin: "2rem 0 1rem 0", justifyContent: "center" }}
+            style={{
+              margin: "2rem 0 1rem 0",
+              justifyContent: "center",
+              alignItems: "flex-start",
+            }}
           >
             <svg
               version="1.1"
@@ -107,12 +119,16 @@ const Footer = () => {
               width="20"
               height="20"
               viewBox="0 0 20 20"
-              style={{ marginRight: "8px", fill: "white" }}
+              style={{ marginRight: "5px", fill: "white" }}
             >
               <title>location</title>
               <path d="M10 20s-7-9.13-7-13c0-3.866 3.134-7 7-7s7 3.134 7 7v0c0 3.87-7 13-7 13zM10 9c1.105 0 2-0.895 2-2s-0.895-2-2-2v0c-1.105 0-2 0.895-2 2s0.895 2 2 2v0z"></path>
             </svg>
-            <p style={{ fontSize: "13px" }}>
+            <p
+              className="map-link"
+              style={{ fontSize: "13px" }}
+              onClick={showInMapClicked}
+            >
               Molte Grazie Plaza, KG 161 St, Kimironko, Kigali
             </p>
           </div>

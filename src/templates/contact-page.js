@@ -10,6 +10,19 @@ import ReactGoogleMap from "react-google-map";
 // eslint-disable-next-line
 export const ContactPageTemplate = ({ image, title }) => {
   const heroImage = getImage(image) || image;
+  const coordinates = { lat: -1.9500408839556205, lng: 30.126949553586197 };
+
+  const openInMap = () => {
+    window.open(
+      "https://maps.google.com?q=" + coordinates.lat + "," + coordinates.lng
+    );
+  };
+
+  const handleMapLoaded = (googleMaps) => {
+    if (googleMaps) {
+      console.log("Map loaded successfully");
+    }
+  };
 
   return (
     <div className="content">
@@ -38,13 +51,15 @@ export const ContactPageTemplate = ({ image, title }) => {
                 width="25"
                 height="25"
                 viewBox="0 0 20 20"
-                style={{ marginRight: "8px" }}
+                style={{ marginRight: "5px" }}
               >
                 <title>location</title>
                 <path d="M10 20s-7-9.13-7-13c0-3.866 3.134-7 7-7s7 3.134 7 7v0c0 3.87-7 13-7 13zM10 9c1.105 0 2-0.895 2-2s-0.895-2-2-2v0c-1.105 0-2 0.895-2 2s0.895 2 2 2v0z"></path>
               </svg>
 
-              <span>Molte Grazie Plaza, KG 161 St, Kimironko, Kigali</span>
+              <span className="map-link" onClick={openInMap}>
+                Molte Grazie Plaza, KG 161 St, Kimironko, Kigali
+              </span>
             </div>
 
             <div
@@ -101,12 +116,22 @@ export const ContactPageTemplate = ({ image, title }) => {
                 <div style={{ height: "500px" }}>
                   <ReactGoogleMap
                     googleMaps={googleMaps}
-                    center={{
-                      lat: -1.9500408839556205,
-                      lng: 30.126949553586197,
-                    }}
+                    center={coordinates}
                     zoom={8}
-                  />
+                    onLoad={handleMapLoaded}
+                  >
+                    <svg
+                      version="1.1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      style={{ fill: "red" }}
+                    >
+                      <title>location</title>
+                      <path d="M10 20s-7-9.13-7-13c0-3.866 3.134-7 7-7s7 3.134 7 7v0c0 3.87-7 13-7 13zM10 9c1.105 0 2-0.895 2-2s-0.895-2-2-2v0c-1.105 0-2 0.895-2 2s0.895 2 2 2v0z"></path>
+                    </svg>
+                  </ReactGoogleMap>
                 </div>
               )
             }
