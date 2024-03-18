@@ -3,6 +3,7 @@ const {
   GATSBY_MAILGUN_API_KEY,
   GATSBY_MAILGUN_DOMAIN,
   GATSBY_TO_EMAIL_ADDRESS,
+  GATSBY_FROM_EMAIL_ADDRESS,
 } = process.env;
 const mailgun = require("mailgun-js")({
   apiKey: GATSBY_MAILGUN_API_KEY,
@@ -30,9 +31,9 @@ exports.handler = async (event) => {
   }
   const { name, phoneNumber, services, date, time } = data;
   const mailgunData = {
-    from: `${name} - Cool Salon`,
+    from: GATSBY_FROM_EMAIL_ADDRESS,
     to: GATSBY_TO_EMAIL_ADDRESS,
-    subject: `New booking from ${name}`,
+    subject: `New Cool Salon booking from ${name}`,
     text: `Name: ${name}\nPhone Number: ${phoneNumber}\nService: ${services}\nDate & Time: ${date} - ${time}`,
   };
 
