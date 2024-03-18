@@ -7,9 +7,19 @@ import { graphql } from "gatsby";
 import { getImage } from "gatsby-plugin-image";
 import FullWidthImage from "../components/FullWidthImage";
 import Select from "react-select";
+import axios from "axios";
 
 export const BookingPageTemplate = ({ image, title }) => {
   const heroImage = getImage(image) || image;
+  const [messageSuccess, setMessageSuccess] = React.useState(false);
+  const [messageError, setMessageError] = React.useState(false);
+  const initialValues = {
+    name: "",
+    phoneNumber: "",
+    services: [],
+    date: "",
+    time: "",
+  };
   const options = [
     { value: "barbing", label: "Barbing" },
     { value: "washing", label: "Washing" },
@@ -18,23 +28,45 @@ export const BookingPageTemplate = ({ image, title }) => {
     { value: "none", label: "Not listed here" },
   ];
 
-  const initialValues = {
-    name: "",
-    phoneNumber: "",
-    service: [],
-    date: "",
-    time: "",
-  };
-
   const validationSchema = Yup.object({
     name: Yup.string().required("Full name is required"),
     phoneNumber: Yup.string().required("Phone number is required"),
+    services: Yup.array()
+      .required("Service is required")
+      .min(1, "You must select at least one service"),
+
     date: Yup.date().required("Date is required"),
-    time: Yup.date().required("Time is required"),
+    time: Yup.string().required("Time is required"),
   });
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    setSubmitting(false);
+  const convertTo12HourFormat = (time24) => {
+    const [hours24, minutes] = time24.split(":");
+    let hours12 = parseInt(hours24, 10) % 12 || 12;
+    const period = parseInt(hours24, 10) < 12 ? "AM" : "PM";
+    return `${hours12.toString().padStart(2, "0")}:${minutes} ${period}`;
+  };
+
+  const handleSubmit = async ({ name, phoneNumber, services, date, time }) => {
+    const formattedTime = convertTo12HourFormat(time);
+    const formattedServices = services.map((item) => item.label).join(", ");
+    const response = await axios.post("/.netlify/functions/book", {
+      name,
+      phoneNumber,
+      services: formattedServices,
+      date,
+      time: formattedTime,
+    });
+
+    if (response.status === 200) {
+      setMessageSuccess(true);
+    } else {
+      setMessageError(true);
+    }
+
+    setTimeout(() => {
+      setMessageSuccess(false);
+      setMessageError(false);
+    }, 5000);
   };
 
   return (
@@ -96,22 +128,27 @@ export const BookingPageTemplate = ({ image, title }) => {
 
                   <div className="field">
                     <div className="field">
-                      <label className="label" htmlFor="service">
-                        Service
+                      <label className="label" htmlFor="services">
+                        Services
                       </label>
                       <div className="control">
                         <Select
                           defaultValue={"none"}
                           isMulti
-                          name="service"
+                          name="services"
                           options={options}
-                          value={values.service}
-                          onChange={(service) =>
-                            setFieldValue("service", service)
+                          value={values.services}
+                          onChange={(services) =>
+                            setFieldValue("services", services)
                           }
-                          placeholder="Select service"
+                          placeholder="Select services"
                         />
                       </div>
+                      <ErrorMessage
+                        name="service"
+                        component="div"
+                        className="error booking-error-message"
+                      />
                     </div>
 
                     <div style={{ display: "flex" }}>
@@ -174,6 +211,15 @@ export const BookingPageTemplate = ({ image, title }) => {
                       Create Booking
                     </button>
                   </div>
+                  {messageSuccess ? (
+                    <p className="success-msg">
+                      Your booking was created successfully! We'll be in touch.
+                    </p>
+                  ) : messageError ? (
+                    <p className="error-msg">
+                      An error occured while creating booking, please try again.
+                    </p>
+                  ) : null}
                 </Form>
               );
             }}
