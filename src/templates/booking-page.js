@@ -151,11 +151,8 @@ export const BookingPageTemplate = ({ image, title }) => {
                       />
                     </div>
 
-                    <div style={{ display: "flex" }}>
-                      <div
-                        className="field"
-                        style={{ width: "100%", marginRight: "6px" }}
-                      >
+                    <div style={{ display: "flex", flexWrap: "wrap" }}>
+                      <div className="field" style={{ width: "100%" }}>
                         <label className="label" htmlFor="date">
                           Date
                         </label>
@@ -176,10 +173,7 @@ export const BookingPageTemplate = ({ image, title }) => {
                         />
                       </div>
 
-                      <div
-                        className="field"
-                        style={{ width: "100%", marginLeft: "6px" }}
-                      >
+                      <div className="field" style={{ width: "100%" }}>
                         <label className="label" htmlFor="time">
                           Time
                         </label>
@@ -206,7 +200,7 @@ export const BookingPageTemplate = ({ image, title }) => {
                     <button
                       className="cta cta-blue is-link"
                       type="submit"
-                      style={{ paddingBlock: "8px", marginTop: "35px" }}
+                      style={{ paddingBlock: "8px" }}
                     >
                       Create Booking
                     </button>
@@ -219,7 +213,9 @@ export const BookingPageTemplate = ({ image, title }) => {
                     <p className="error-msg">
                       An error occured while creating booking, please try again.
                     </p>
-                  ) : null}
+                  ) : (
+                    <p>&nbsp;</p>
+                  )}
                 </Form>
               );
             }}
