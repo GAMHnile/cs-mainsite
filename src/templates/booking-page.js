@@ -13,6 +13,7 @@ export const BookingPageTemplate = ({ image, title }) => {
   const heroImage = getImage(image) || image;
   const [messageSuccess, setMessageSuccess] = React.useState(false);
   const [messageError, setMessageError] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const initialValues = {
     name: "",
     phoneNumber: "",
@@ -34,7 +35,6 @@ export const BookingPageTemplate = ({ image, title }) => {
     services: Yup.array()
       .required("Service is required")
       .min(1, "You must select at least one service"),
-
     date: Yup.date().required("Date is required"),
     time: Yup.string().required("Time is required"),
   });
@@ -47,6 +47,7 @@ export const BookingPageTemplate = ({ image, title }) => {
   };
 
   const handleSubmit = async ({ name, phoneNumber, services, date, time }) => {
+    setIsLoading(true);
     const formattedTime = convertTo12HourFormat(time);
     const formattedServices = services.map((item) => item.label).join(", ");
     const response = await axios.post("/.netlify/functions/book", {
@@ -56,6 +57,7 @@ export const BookingPageTemplate = ({ image, title }) => {
       date,
       time: formattedTime,
     });
+    setIsLoading(false);
 
     if (response.status === 200) {
       setMessageSuccess(true);
@@ -145,7 +147,7 @@ export const BookingPageTemplate = ({ image, title }) => {
                         />
                       </div>
                       <ErrorMessage
-                        name="service"
+                        name="services"
                         component="div"
                         className="error booking-error-message"
                       />
@@ -197,12 +199,12 @@ export const BookingPageTemplate = ({ image, title }) => {
                   </div>
 
                   <div className="field">
-                    <button
-                      className="cta cta-blue is-link"
-                      type="submit"
-                      style={{ paddingBlock: "8px" }}
-                    >
-                      Create Booking
+                    <button className="cta cta-blue is-link" type="submit">
+                      {!isLoading ? (
+                        "Create Booking"
+                      ) : (
+                        <div className="loader"></div>
+                      )}
                     </button>
                   </div>
                   {messageSuccess ? (
