@@ -20,7 +20,6 @@ exports.handler = async (event) => {
   }
 
   const data = JSON.parse(event.body);
-  console.log("DATA");
   if (
     !data?.name ||
     !data?.phoneNumber ||
