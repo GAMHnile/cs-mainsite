@@ -32,10 +32,9 @@ exports.handler = async (event) => {
   }
   const { name, phoneNumber, services, date, time } = data;
   const mailgunData = {
-    from: "davidd.akindoju@gmail.com",
-    // to: GATSBY_TO_EMAIL_ADDRESS,
-    to: "davidd.akindoju@gmail.com",
-    subject: `New booking from ${name}`,
+    from: GATSBY_FROM_EMAIL_ADDRESS,
+    to: GATSBY_TO_EMAIL_ADDRESS,
+    subject: `New Cool Salon booking from ${name}`,
     text: `Name: ${name}\nPhone Number: ${phoneNumber}\nService: ${services}\nDate & Time: ${date} - ${time}`,
   };
 
