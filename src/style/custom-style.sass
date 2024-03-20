@@ -253,6 +253,23 @@ body
   box-sizing: border-box
   animation: rotation 1s linear infinite
   display: inline-block
+  
+.map-wrapper
+  height: 500px
+  display: flex
+  align-items: center
+  justify-content: center
+     
+.map-loader
+  border: 2px solid $color-primary
+  border-bottom-color: transparent
+  border-radius: 50%
+  box-sizing: border-box
+  animation: rotation 1s linear infinite
+  display: inline-block
+  width: 60px
+  height: 60px
+  position: absolute
     
 @keyframes rotation 
   0% 
@@ -260,5 +277,3 @@ body
   
   100% 
       transform: rotate(360deg)
-    
-     
