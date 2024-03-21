@@ -17,6 +17,7 @@ export const BookingPageTemplate = ({ image, title }) => {
   const initialValues = {
     name: "",
     phoneNumber: "",
+    email: "",
     services: [],
     date: "",
     time: "",
@@ -46,7 +47,14 @@ export const BookingPageTemplate = ({ image, title }) => {
     return `${hours12.toString().padStart(2, "0")}:${minutes} ${period}`;
   };
 
-  const handleSubmit = async ({ name, phoneNumber, services, date, time }) => {
+  const handleSubmit = async ({
+    name,
+    phoneNumber,
+    services,
+    date,
+    time,
+    email,
+  }) => {
     setIsLoading(true);
     const formattedTime = convertTo12HourFormat(time);
     const formattedServices = services.map((item) => item.label).join(", ");
@@ -56,6 +64,7 @@ export const BookingPageTemplate = ({ image, title }) => {
       services: formattedServices,
       date,
       time: formattedTime,
+      email,
     });
     setIsLoading(false);
 
@@ -126,6 +135,20 @@ export const BookingPageTemplate = ({ image, title }) => {
                       component="div"
                       className="error booking-error-message"
                     />
+                  </div>
+
+                  <div className="field">
+                    <label className="label" htmlFor="email">
+                      Email Address
+                    </label>
+                    <div className="control">
+                      <Field
+                        className="input booking-field"
+                        name="email"
+                        id="email"
+                        placeholder="Email Address"
+                      />
+                    </div>
                   </div>
 
                   <div className="field">
