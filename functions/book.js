@@ -5,7 +5,6 @@ const {
   GATSBY_CREATE_BOOKING_FROM_EMAIL_ADDRESS,
   GATSBY_CREATE_BOOKING_TO_EMAIL_ADDRESS,
   GATSBY_CONFIRM_BOOKING_FROM_EMAIL_ADDRESS,
-  GATSBY_CONFIRM_BOOKING_TO_EMAIL_ADDRESS,
 } = process.env;
 const mailgun = require("mailgun-js")({
   apiKey: GATSBY_MAILGUN_API_KEY,
@@ -125,7 +124,7 @@ exports.handler = async (event) => {
   };
   const confirmBookingData = {
     from: GATSBY_CONFIRM_BOOKING_FROM_EMAIL_ADDRESS,
-    to: GATSBY_CONFIRM_BOOKING_TO_EMAIL_ADDRESS,
+    to: email,
     subject: `Cool Salon - Booking Confirmation`,
     html: `<html>
     <head>
