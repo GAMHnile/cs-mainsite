@@ -63,7 +63,7 @@ body
 
 .cta
   margin-top: 24px
-  padding: 10px 24px
+  height: 40px
   border: 2.5px solid white
   border-radius: 25px
   background: transparent
@@ -73,6 +73,8 @@ body
   cursor: pointer
   color: white
   font-weight: bold
+  width: 180px
+  position: relative
   
 .cta:hover, .cta:focus
   transform: scale(1.05)
@@ -107,6 +109,14 @@ body
 
 .footer-items-list-item > a:hover
   color: $color-primary !important
+
+.success-msg
+  color: #02b802
+  text-align: center
+
+.error-msg
+  color: red
+  text-align: center
 
 .card
   border: 1px solid #d0d7e7
@@ -232,3 +242,38 @@ body
 .flex-center
   display: flex
   align-items: center
+
+
+.loader 
+  width: 25px
+  height: 25px
+  border: 2px solid $color-primary
+  border-bottom-color: transparent
+  border-radius: 50%
+  box-sizing: border-box
+  animation: rotation 1s linear infinite
+  display: inline-block
+  
+.map-wrapper
+  height: 500px
+  display: flex
+  align-items: center
+  justify-content: center
+     
+.map-loader
+  border: 2px solid $color-primary
+  border-bottom-color: transparent
+  border-radius: 50%
+  box-sizing: border-box
+  animation: rotation 1s linear infinite
+  display: inline-block
+  width: 60px
+  height: 60px
+  position: absolute
+    
+@keyframes rotation 
+  0% 
+      transform: rotate(0deg)
+  
+  100% 
+      transform: rotate(360deg)

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 import { getImage } from "gatsby-plugin-image";
@@ -8,6 +8,7 @@ import GoogleMapReact from "google-map-react";
 
 // eslint-disable-next-line
 export const ContactPageTemplate = ({ image, title }) => {
+  const [isLoadingMap, setIsLoadingMap] = useState(true);
   const heroImage = getImage(image) || image;
   const defaultProps = {
     center: {
@@ -106,25 +107,30 @@ export const ContactPageTemplate = ({ image, title }) => {
             </div>
           </div>
 
-          <div style={{ height: "500px" }}>
+          <div className="map-wrapper">
+            <span className="map-loader"></span>
             <GoogleMapReact
               bootstrapURLKeys={{ key: process.env.GATSBY_GOOGLE_MAPS_API_KEY }}
               defaultCenter={defaultProps.center}
               defaultZoom={defaultProps.zoom}
+              onGoogleApiLoaded={() => setIsLoadingMap(false)}
+              yesIWantToUseGoogleMapApiInternals={true}
             >
-              <svg
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
-                viewBox="0 0 20 20"
-                style={{ fill: "#d30000" }}
-                lat={defaultProps.center.lat}
-                lng={defaultProps.center.lng}
-              >
-                <title>location</title>
-                <path d="M10 20s-7-9.13-7-13c0-3.866 3.134-7 7-7s7 3.134 7 7v0c0 3.87-7 13-7 13zM10 9c1.105 0 2-0.895 2-2s-0.895-2-2-2v0c-1.105 0-2 0.895-2 2s0.895 2 2 2v0z"></path>
-              </svg>
+              {!isLoadingMap && (
+                <svg
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="40"
+                  height="40"
+                  viewBox="0 0 20 20"
+                  style={{ fill: "#D2042D" }}
+                  lat={defaultProps.center.lat}
+                  lng={defaultProps.center.lng}
+                >
+                  <title>location</title>
+                  <path d="M10 20s-7-9.13-7-13c0-3.866 3.134-7 7-7s7 3.134 7 7v0c0 3.87-7 13-7 13zM10 9c1.105 0 2-0.895 2-2s-0.895-2-2-2v0c-1.105 0-2 0.895-2 2s0.895 2 2 2v0z"></path>
+                </svg>
+              )}
             </GoogleMapReact>
           </div>
         </div>
