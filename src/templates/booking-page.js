@@ -20,7 +20,9 @@ export const BookingPageTemplate = ({ image, title }) => {
     email: "",
     services: [],
     date: "",
-    time: "",
+    time1: "",
+    time2: "",
+    time3: "",
   };
   const validationSchema = Yup.object({
     name: Yup.string().required("Full name is required"),
@@ -29,15 +31,36 @@ export const BookingPageTemplate = ({ image, title }) => {
       .required("Service is required")
       .min(1, "You must select at least one service"),
     date: Yup.date().required("Date is required"),
-    time: Yup.string().required("Time is required"),
+    time1: Yup.string().required("Primary time slot is required"),
   });
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async ({ name, phoneNumber, services, date, time, email }) => {
+    onSubmit: async ({
+      name,
+      phoneNumber,
+      services,
+      date,
+      time1,
+      time2,
+      time3,
+      email,
+    }) => {
       setIsLoading(true);
-      const formattedTime = convertTo12HourFormat(time);
+      const formattedTime1 = convertTo12HourFormat(time1);
+      const formattedTime2 = convertTo12HourFormat(time2);
+      const formattedTime3 = convertTo12HourFormat(time3);
       const formattedServices = services.map((item) => item.label).join(", ");
+      let formattedTime = [formattedTime1];
+
+      if (formattedTime2) {
+        formattedTime.push(formattedTime2);
+      }
+      if (formattedTime3) {
+        formattedTime.push(formattedTime3);
+      }
+
+      formattedTime = formattedTime.map((time) => time).join(" | ");
       const response = await axios.post("/.netlify/functions/book", {
         name,
         phoneNumber,
@@ -70,11 +93,14 @@ export const BookingPageTemplate = ({ image, title }) => {
     { value: "hair-dressing", label: "Hair Dressing" },
     { value: "none", label: "Not listed here" },
   ];
+
   const convertTo12HourFormat = (time24) => {
-    const [hours24, minutes] = time24.split(":");
-    let hours12 = parseInt(hours24, 10) % 12 || 12;
-    const period = parseInt(hours24, 10) < 12 ? "AM" : "PM";
-    return `${hours12.toString().padStart(2, "0")}:${minutes} ${period}`;
+    if (time24) {
+      const [hours24, minutes] = time24.split(":");
+      let hours12 = parseInt(hours24, 10) % 12 || 12;
+      const period = parseInt(hours24, 10) < 12 ? "AM" : "PM";
+      return `${hours12.toString().padStart(2, "0")}:${minutes}${period}`;
+    }
   };
 
   return (
@@ -184,28 +210,69 @@ export const BookingPageTemplate = ({ image, title }) => {
                     />
                   </div>
 
+                  <span className="booking-time-disclaimer">
+                    Please select 3 time slots that work for you
+                  </span>
+
                   <div className="field" style={{ width: "100%" }}>
-                    <label className="label" htmlFor="time">
-                      Time
+                    <label className="label" htmlFor="time1">
+                      Time Slot 1
                     </label>
                     <div className="control">
                       <input
                         type="time"
-                        id="time"
-                        name="time"
+                        id="time1"
+                        name="time1"
                         className="input booking-field"
                         onChange={handleChange}
-                        value={values.time}
+                        value={values.time1}
                       />
                     </div>
                     <ErrorMessage
-                      name="time"
+                      name="time1"
                       component="div"
                       className="error booking-error-message"
                     />
                   </div>
+
+                  <div className="field" style={{ width: "100%" }}>
+                    <label className="label" htmlFor="time2">
+                      Time Slot 2
+                    </label>
+                    <div className="control">
+                      <input
+                        type="time"
+                        id="time2"
+                        name="time2"
+                        className="input booking-field"
+                        onChange={handleChange}
+                        value={values.time2}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="field" style={{ width: "100%" }}>
+                    <label className="label" htmlFor="time3">
+                      Time Slot 3
+                    </label>
+                    <div className="control">
+                      <input
+                        type="time"
+                        id="time3"
+                        name="time3"
+                        className="input booking-field"
+                        onChange={handleChange}
+                        value={values.time3}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
+
+              <span className="booking-time-note">
+                We'll process your selected time slots and ensure we get in
+                touch with you soon.
+              </span>
 
               <div className="field">
                 <button
