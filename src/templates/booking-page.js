@@ -222,7 +222,7 @@ export const BookingPageTemplate = ({ image, title }) => {
               </div>
               {messageSuccess ? (
                 <p className="success-msg">
-                  Your booking was created successfully! We'll be in touch.
+                  Your booking was created successfully!
                 </p>
               ) : messageError ? (
                 <p className="error-msg">
