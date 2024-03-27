@@ -114,7 +114,8 @@ exports.handler = async (event) => {
             <p>Phone Number: <span>${phoneNumber}</span></p>
             <p>Email Address: <span>${email || ""}</span></p>
             <p>Service: <span>${services}</span></p>
-            <p>Date: <span>${date} - ${time}</span></p>
+            <p>Date: <span>${date}</span></p>
+            <p>Selected time slots: <span>${time}</span></p>
           </div>
         </div>
       </div>
@@ -202,7 +203,8 @@ exports.handler = async (event) => {
             <p>Name: <span>${name}</span></p>
             <p>Phone Number: <span>${phoneNumber}</span></p>
             <p>Service: <span>${services}</span></p>
-            <p>Date: <span>${date} - ${time}</span></p>
+            <p>Date: <span>${date}</span></p>
+            <p>Selected time slots: <span>${time}</span></p>
           </div>
         </div>
         <p class="disclaimer">If you received this in error, please disregard.</p>
@@ -221,7 +223,7 @@ exports.handler = async (event) => {
     return {
       status: "success",
       statusCode: 200,
-      body: "Your booking was created successfully! We'll be in touch.",
+      body: "Your booking was created successfully!",
     };
   } catch (error) {
     return {

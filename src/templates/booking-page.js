@@ -69,6 +69,10 @@ export const BookingPageTemplate = ({ image, title }) => {
         time: formattedTime,
         email,
       });
+      await axios.post(
+        `https://docs.google.com/forms/u/0/d/e/1FAIpQLSdiHmqBXN2XjALI2HuDi7O2Ty1sxSRyBbwTgIfAU5GR8rztAQ/formResponse?entry.2005620554=${name}&entry.1045781291=${phoneNumber}&entry.1065046570=${email}&entry.1166974658=${formattedServices}&entry.839337160=${date}&entry.1495818453=${formattedTime}`
+      );
+
       setIsLoading(false);
 
       if (response.status === 200) {
@@ -279,6 +283,7 @@ export const BookingPageTemplate = ({ image, title }) => {
                   className="cta cta-blue is-link"
                   type="submit"
                   onClick={handleSubmit}
+                  disabled={isLoading}
                 >
                   {!isLoading ? (
                     "Create Booking"
